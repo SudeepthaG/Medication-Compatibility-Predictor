@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-//homework3
+
 public class Predictor
 {
     public static void main(String args[]) throws Exception {
@@ -24,6 +24,8 @@ public class Predictor
     }
 }
 
+
+
 class Solution
 {
     int n;
@@ -32,6 +34,8 @@ class Solution
     LinkedList<String> kb;
     String result="";
     int std=0;
+    
+    
     public Solution(int n, LinkedList<String> query, int k, LinkedList<String> kb)
     {
         this.n=n;
@@ -40,7 +44,7 @@ class Solution
         this.kb=kb;
     }
 
-
+    
     List convertToCNF(LinkedList kb)
     {
 
@@ -51,7 +55,6 @@ class Solution
 //        System.out.println("cnfsent befoore:"+cnfsent);
         for(int i=0;i<kb.size();i++)
         {
-            //System.out.println(itr.next());
             List<HashMap> cnfsent=new LinkedList<>();
             List<HashMap> cnfsentr=new LinkedList<>();
             sent= (String) kb.get(i);
@@ -174,8 +177,6 @@ class Solution
             {
                 literalr=cnfsent.get(ir);
                 llr=literalr.get(literalr.keySet().toArray()[0]);
-//                System.out.println(literalr);
-//                System.out.println(llr);
                 for(int jr=1;jr<llr.size();jr++)
                 {
                     if(Character.isLowerCase(llr.get(jr).charAt(0)))
@@ -188,12 +189,9 @@ class Solution
                     }
                 }
             }
-//            System.out.println(replacehm);
-//            System.out.println(cnfsent);
             for(int ir=0;ir<cnfsent.size();ir++)
             {
                 literalr=cnfsent.get(ir);
-//                System.out.println(literalr);
                 llr=literalr.get(literalr.keySet().toArray()[0]);
                 for(int kr=0;kr<llr.size();kr++)
                 {
@@ -203,17 +201,14 @@ class Solution
                         literalr.put((String) literalr.keySet().toArray()[0], llr);
                     }
                 }
-//                System.out.println(literalr);
             }
             cnfsentr.add(literalr);
-//            System.out.println(cnfsentr);
             cnfkb.add(cnfsent);
-//            System.out.println("literals:"+literal);
-//            System.out.println("cnfsent:"+cnfsent);
         }
 
         return cnfkb;
     }
+    
     
     private static Object deepCopy(Object object) {
         try {
@@ -230,6 +225,7 @@ class Solution
         }
     }
 
+    
     String solutionMainFuntion()
     {
         String result="";
@@ -317,14 +313,11 @@ class Solution
                     i=0;
                 }
                 addition=false;
-
-
                 List<List> sent_i = currentkb.get(i);
                 //System.out.println("\ni="+i+" list="+sent_i);
                 for (p = 0; p < currentkb.size(); p++) {
                     List<List> sent_p = currentkb.get(p);
                     //  System.out.println("\np="+p+" list="+sent_p);
-
                     for (int j = 0; j < sent_i.size(); j++) {
                         HashMap<String, LinkedList> predicate = (HashMap<String, LinkedList>) sent_i.get(j);
 //                        System.out.println("j=" + j + " hashmap=" + predicate);
@@ -346,14 +339,12 @@ class Solution
                                     }
                                     else if(res.size()!=0)
                                     {
-
                                         List<List> resultlist=new LinkedList<>();
                                         resultlist.add(res);
                                         List<List> resultlist2=new LinkedList<>();
                                         resultlist2=(List) deepCopy(resultlist);
                                         if(resultlist2.equals(cnfsent2kb))
                                         {
-
 //                                            System.out.println("negation Query stmt inferred.hece true");
                                             qresult="TRUE\n";
                                             loopbreak=true;
@@ -370,7 +361,6 @@ class Solution
                                         hmt.put("false","false");
                                         List<HashMap> resllt=new LinkedList<>();
                                         resllt.add(hmt);
-
 
                                         if(!currentkb.contains(res)&&!res.contains(hmt))
                                         {
@@ -397,6 +387,7 @@ class Solution
         return result;
     }
 
+    
     List unification(List<List> sent_i1, List<List> sent_p1, HashMap<String, LinkedList> predicate1, HashMap<String, LinkedList> predicatep1)
     {
         List<List> sent_i=new LinkedList<>();
@@ -555,10 +546,6 @@ class Solution
                     break;
             }
         }
-
-
-
-
         //checking for tautology in resultant  solution
         int counter = 0, i = 0, j = 0;
         for (i = 0; i < newsent.size(); i++) {
@@ -615,6 +602,7 @@ class Solution
         return newsent;
     }
 
+    
     HashMap unify(LinkedList x, LinkedList y,HashMap<String,String> theta1)
     {
         HashMap<String,String> theta=new HashMap<>();
@@ -671,6 +659,7 @@ class Solution
             return failure;
     }
 
+    
     HashMap unifyVar(String a, String b, HashMap theta)
     {
         LinkedList lla=new LinkedList();
